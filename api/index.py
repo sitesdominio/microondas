@@ -38,9 +38,9 @@ def render(title, body, refresh=False, status=200):
     response.headers["Cache-Control"]="no-store"
     return response
 
-def entry(message="", success=False):
+def entry(message="", success=False, status=200):
     note = f'<p class="{"success" if success else "error"}" role="status">{html.escape(message)}</p>' if message else ""
-    return render("Entrada na fila",f'<section class="panel"><p class="eyebrow">GERENCIAMENTO DE FILAS</p><h1>Entre na fila</h1><p>Informe sua matrícula para começar.</p>{note}<form action="/validar" method="post"><label for="matricula">Matrícula</label><input id="matricula" name="matricula" required autofocus autocomplete="off" inputmode="numeric" maxlength="20"><button type="submit">Continuar</button></form></section>')
+    return render("Entrada na fila",f'<section class="panel"><p class="eyebrow">GERENCIAMENTO DE FILAS</p><h1>Entre na fila</h1><p>Informe sua matrícula para começar.</p>{note}<form action="/validar" method="post"><label for="matricula">Matrícula</label><input id="matricula" name="matricula" required autofocus autocomplete="off" inputmode="numeric" maxlength="20"><button type="submit">Continuar</button></form></section>',status=status)
 
 def choose_time(matricula,nome):
     options="".join(f'<option value="{i}">{i} min</option>' for i in range(1,9))
